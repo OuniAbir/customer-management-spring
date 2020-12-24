@@ -3,6 +3,7 @@ package com.springRest.crm.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,24 +39,37 @@ public class CustomerController {
 		return theCustomer;
 	}
 
-	//add mappping for POST /customers - add new customer
+	// add mappping for POST /customers - add new customer
 	@PostMapping("/customers")
 	public Customer addCustomer(@RequestBody Customer customer) {
-		
+
 		customer.setId(0);
 		customerService.saveCustomer(customer);
-		return customer ;
-		
+		return customer;
+
 	}
-	
-	// add mapping for PUT /customers - update an exsisting customer 
+
+	// add mapping for PUT /customers - update an exsisting customer
 	@PutMapping("/customers")
-	public Customer updateCustomer(@RequestBody Customer customer)
-	{
-		
+	public Customer updateCustomer(@RequestBody Customer customer) {
+
 		customerService.saveCustomer(customer);
-		return customer ;
+		return customer;
 	}
-	
-	
+
+	// add mapping for DELETE /customers/{customerId}
+
+	@DeleteMapping("/customers/{customerId}")
+	public String deleteCustomer(@PathVariable int customerId) {
+
+		// throw exception if customer doesn't exsist
+		Customer theCustomer = customerService.getCustomer(customerId);
+		if (theCustomer == null) {
+			throw new CustomerNotFoundException("Customer id Not Found - " + customerId);
+		}
+
+		customerService.deleteCustomer(customerId);
+		return "Deleting customer id - " + customerId;
+	}
+
 }
