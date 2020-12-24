@@ -5,11 +5,11 @@ import java.util.List;
 import com.springRest.crm.demo.entity.Customer;
 
 public interface CustomerService {
-	public List<Customer> getCustomers();
+	public List<Customer> getCustomer();
 
 	public void saveCustomer(Customer customer);
 
-	public Customer getCustomers(int theId);
+	public Customer getCustomer(int theId);
 
 	public void deleteCustomer(int theId);
 

@@ -19,7 +19,7 @@ public class CustomerServiceImpl implements CustomerService {
 	/* Delegates the calls from the CustomerService to the actual CustomerDAO. */
 	
 	@Transactional
-	public List<Customer> getCustomers() {
+	public List<Customer> getCustomer() {
 		// Delegate calls to DAO
 		return customerDao.getCustomer();
 	}
@@ -30,7 +30,7 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Transactional
-	public Customer getCustomers(int theId) {
+	public Customer getCustomer(int theId) {
 		return customerDao.getCustomer(theId);
 	}
 
